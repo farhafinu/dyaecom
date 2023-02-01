@@ -206,7 +206,7 @@
                 <div id="myTabContent" class="tab-content">
 
                   <div class="tab-pane fade active in" id="seller-login">
-                    <form class="form-horizontal" method="POST">
+                    <form class="form-horizontal" method="POST" >
                       {% csrf_token %}
                       <fieldset>
 
@@ -243,7 +243,7 @@
 
                  <!-- seller signup form -->
                   <div class="tab-pane fade" id="seller-signup">
-                    <form class="form-horizontal" method="POST">
+                    <form class="form-horizontal" method="POST" enctype="multipart/form-data">
                       {% csrf_token %}
                       <fieldset>
 
@@ -523,7 +523,7 @@
                 <li class="dropdown"> <a href="contact.html">Kids & Girls</a> </li>
                 {% if not 'c_id' in request.session %}
                 </li>
-                <li class="dropdown  navbar-right special-menu"> <a href="#signup" data-toggle="modal"
+                <li class="dropdown  navbar-right "> <a href="#signup" data-toggle="modal"
                     data-target=".seller-log">Become a seller</a> </li>
                   {% endif %}
               </ul>

@@ -21,7 +21,8 @@ def customers_list(request):
     return render(request,'ecom_admin/customers_list.html')
 
 def registered_resellers(request):
-    return render(request,'ecom_admin/registered_resellers.html')
+    reseller = Reseller.objects.filter(s_status = "approved")
+    return render(request,'ecom_admin/registered_resellers.html',{'pending':reseller})
 
 def change_password(request):
     return render(request,'ecom_admin/change_password.html')
@@ -38,6 +39,14 @@ def r_approve(request,reseller_id):
     recipient_list = ['farhafinu36@gmail.com']
     send_mail( subject, message, email_from, recipient_list )
     return redirect('ecom_admin:approve_reseller')
+
+def d_approve(request,reseller_id):
+    reseller= Reseller.objects.get(id=reseller_id)
+    reseller.delete()
+    return render(request,'ecom_admin/registered_resellers.html')
+
+# def testing(request):
+#     return render(request,)    
 
 
 

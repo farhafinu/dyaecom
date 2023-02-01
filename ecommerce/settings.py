@@ -81,11 +81,11 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 DATABASES = {
     'default':{
        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME':'final',
+        'NAME':'dyaecom',
         'USER':'postgres',
-        'PASSWORD':'root',
+        'PASSWORD':'1234',
         'HOST':'localhost',
-        'PORT':'5433'
+        'PORT':'5432'
     }
    }
 

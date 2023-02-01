@@ -3,66 +3,95 @@
 
 
 {% block content %}
+<style>
+  .centering {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 100%;
+  }
+
+  table {
+    align-items: center;
+    margin-left: 33%;
+    margin-right: auto;
+
+    display: block;
+  }
+
+  @media(max-width:500px) {
+    table {
+      margin-left: 0%;
+    }
+  }
+
+  @media(max-width:700px) {
+    table {
+      margin-left: 5%;
+    }
+  }
+</style>
 
 <h1 style="text-align: center;font-weight: bolder;font-family: Georgia, 'Times New Roman', Times, serif;color: brown;">
   UPDATE STOCK</h1><br>
-<form class="product-form form-inline" style="margin-left: 360px;" method="POST">
+<form class="product-form form-inline" method="POST">
   {% csrf_token %}
+  <div class="centering">
+    <table>
+      <tr>
+        <td><label for="exampleFormControlSelect1" class="lable m-3">Select Category</label></td>
+        <td> <select class="form-control drop format  d-inline" id="category">
+            <option>Clothing</option>
+            <option>Electronics</option>
+            <option>Shoes</option>
+            <option>Watches</option>
+            <option>Jewellery</option>
+          </select></td>
+      </tr>
 
-  <table>
-    <tr>
-      <td><label for="exampleFormControlSelect1" class="lable m-3">Select Category</label></td>
-      <td> <select class="form-control drop format  d-inline" id="category">
-          <option>Clothing</option>
-          <option>Electronics</option>
-          <option>Shoes</option>
-          <option>Watches</option>
-          <option>Jewellery</option>
-        </select></td>
-    </tr>
+      <tr>
+        <td><label for="exampleFormControlSelect1" class="lable m-3">Product No</label></td>
 
-    <tr>
-      <td><label for="exampleFormControlSelect1" class="lable m-3">Product No</label></td>
+        <td>
+          <select class="form-control drop format  d-inline" id="p_no" name="pno">
+            <option value="">p1-090</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="exampleFormControlInput1" class="lable d-inline m-3">Current Stock</label>
 
-      <td> 
-        <select class="form-control drop format  d-inline" id="p_no" name="pno">
-          <option value="">p1-090</option>
-        </select>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label for="exampleFormControlInput1" class="lable d-inline m-3">Current Stock</label>
+        </td>
+        <td>
+          <input type="text" class="form-control  format d-inline" readonly id="c_stock" placeholder="" name="c_stock">
 
-      </td>
-      <td>
-        <input type="text" class="form-control  format d-inline" readonly id="c_stock" placeholder="" name="c_stock">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="exampleFormControlInput1" class="lable d-inline m-3">New Stock</label>
 
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label for="exampleFormControlInput1" class="lable d-inline m-3">New Stock</label>
+        </td>
+        <td>
+          <input type="text" class="form-control  format d-inline" id="n_stock" placeholder="" name="n_stock">
 
-      </td>
-      <td>
-        <input type="text" class="form-control  format d-inline" id="n_stock" placeholder="" name="n_stock">
+        </td>
+      </tr>
 
-      </td>
-    </tr>
+      <tr>
+        <td colspan="2" align="left">
 
-    <tr>
-      <td colspan="2" align="left">
+          <button type="submit" class="btn btn-danger w-50 ml-4"
+            style="position: relative;left:100px;top:20px;width: 100px">Update</button>
 
-        <button type="submit" class="btn btn-danger w-50 ml-4"
-          style="position: relative;left:100px;top:20px;width: 100px">Update</button>
-
-      </td>
-      <td>
-        {{msg}}
-      </td>
-    </tr>
-  </table>
+        </td>
+        <td>
+          {{msg}}
+        </td>
+      </tr>
+    </table>
+  </div>
 </form>
 
 
@@ -72,22 +101,22 @@
       headers: {
         "X-CSRFToken": $('[name=csrfmiddlewaretoken]').val()
       }
-    })    
+    })
 
     $('#category').change(function () {
-      var category = $('#category option:selected').text()     
+      var category = $('#category option:selected').text()
       $.ajax({
         type: 'POST',
         url: "{% url 'reseller:get_product' %}",
         data: {
           'category': category
         },
-        success: function (response) {         
+        success: function (response) {
           data = response.data
-          
+
           $('#p_no option').remove()
           pnumber = ""
-          for (i in data) {            
+          for (i in data) {
             pnumber += "<option value=" + data[i].id + ">" + data[i].p_number + "</option>"
           }
           $('#p_no').append(pnumber)
@@ -104,8 +133,8 @@
           data: {
             'p_no': p_no
           },
-          success: function (response) {            
-            data = response.data             
+          success: function (response) {
+            data = response.data
             $('#c_stock').val(data[0].p_stock)
           }
         })
