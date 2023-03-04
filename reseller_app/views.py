@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from customer.models import Order
+from customer.models import Order,Order_detail
 
 from reseller_app.models import Product, Reseller
 from django.http import JsonResponse
@@ -66,13 +66,37 @@ def update_stock(request):
 
 
 def recent_orders(request):
-    return render(request,'reseller_app/recent_orders.html')
+    product=Product.objects.filter(seller_id=request.session['s_id'])
+    orderdetails=Order_detail.objects.all()
+    orderlist=[]
+    for products in product:
+        for order in orderdetails:
+            if products.id==order.productid_id:
+                orderlist.append(order.id)
+    
+    oder=Order_detail.objects.filter(id__in=orderlist)
+    
+    return render(request,'reseller_app/recent_orders.html',{'details':oder})
 
 def cancelled_orders(request):
     return render(request,'reseller_app/cancelled_orders.html')
 
 def order_history(request):
-    return render(request,'reseller_app/order_history.html')
+    product=Product.objects.filter(seller_id=request.session['s_id'])
+    orderdetails=Order_detail.objects.all()
+    orderlist=[]
+    for products in product:
+        for order in orderdetails:
+            if products.id==order.productid_id:
+                orderlist.append(order.id)
+    
+    oder=Order_detail.objects.filter(id__in=orderlist)
+
+            
+        
+            
+    
+    return render(request,'reseller_app/order_history.html',{'details':oder})
 
 def change_password(request):
     if request.method == 'POST':

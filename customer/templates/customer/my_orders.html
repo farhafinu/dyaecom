@@ -71,7 +71,7 @@
 		{% for i in orders %}
         <tr>
             <td>{{forloop.counter}}</td>
-			<td><img src="{{orders.p_image.url}}" alt="" width="150px" height="150px"></td>
+			<td><img src="{{i.productid.p_image.url}}" alt="" width="150px" height="150px"></td>
 			
             <td>{{i.productid.p_name }}</td>
             <td>{{i.status}}</td>

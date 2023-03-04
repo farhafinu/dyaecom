@@ -41,6 +41,7 @@
       <tr>
         <td><label for="exampleFormControlSelect1" class="lable m-3">Select Category</label></td>
         <td> <select class="form-control drop format  d-inline" id="category">
+          <option>select category</option>
             <option>Clothing</option>
             <option>Electronics</option>
             <option>Shoes</option>
@@ -54,7 +55,7 @@
 
         <td>
           <select class="form-control drop format  d-inline" id="p_no" name="pno">
-            <option value="">p1-090</option>
+            
           </select>
         </td>
       </tr>
@@ -104,7 +105,7 @@
     })
 
     $('#category').change(function () {
-      var category = $('#category option:selected').text()
+      var category = $('#category').val()
       $.ajax({
         type: 'POST',
         url: "{% url 'reseller:get_product' %}",
@@ -114,13 +115,12 @@
         success: function (response) {
           data = response.data
 
-          $('#p_no option').remove()
-          pnumber = ""
+          $('#p_no option').empty();
+          $('#p_no').append($('<option>').text('select a product').attr('value',''));
           for (i in data) {
-            pnumber += "<option value=" + data[i].id + ">" + data[i].p_number + "</option>"
+           $('#p_no').append($('<option>').text(data[i].p_number).attr('value',data[i].id));
           }
-          $('#p_no').append(pnumber)
-          console.log(pnumber)
+          
 
         }
       })

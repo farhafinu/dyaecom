@@ -567,7 +567,7 @@ img[src="assets/images/blank.gif"] {
 
 .special-product .product .image img {width:100%}
 .special-product .product .col {padding-right:0px}
-.special-product .product .btn-primary {background:none; padding:0px; color:#157ed2; text-decoration:underline; margin-top:5px;}
+.special-product .product .btn-primary {background:none; padding:0px; color:#0088f4; text-decoration:underline; margin-top:5px;}
 
 .special-product .product:last-child {
   margin-top: 20px;
@@ -1097,7 +1097,7 @@ a {
 .top-bar {
   padding:0px;
   font-size: 14px;
-  background: #157ed2;
+  background: #0088f4;
 }
 .top-bar .cnt-account {
   float: right;
@@ -1201,7 +1201,7 @@ header{
 
 .main-header {
   padding:25px 0px 30px 0px;
-  background: #157ed2;
+  background: #0088f4;
 }
 .main-header .logo-holder {
   margin-top:5px;
@@ -5243,7 +5243,7 @@ font-family: FontAwesome;
 }
 .shopping-cart .shopping-cart-table table tbody tr .romove-item a:hover,
 .shopping-cart .shopping-cart-table table tbody tr .romove-item a:focus {
-  color: #ff000 !important;
+  color: #ff0000 !important;
 }
 .shopping-cart .shopping-cart-table table tbody tr .cart-image .entry-thumbnail {
   display: block;

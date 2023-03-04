@@ -100,31 +100,24 @@
             <th> Amount</th>
             
         </tr>
+        {% for order in details %}
+        {% if order.status == 'paid' %}
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{forloop.counter}}</td>
+            <td>{{order.date}}</td>
+            <td>{{order.productid.p_number}}</td>
+            <td>{{order.productid.p_name}}</td>
+            <td>{{order.customer.first_name}} &nbsp; {{oder.customer.last_name}}</td>
+            <td>{{order.customer.mobile}}</td>
+            <td>{{order.customer.address}}</td>
+            <td>{{order.quantity}}</td>
+            <td>{{order.price}}</td>
              
         </tr>
+        {% endif %}
+        {% endfor %}
        
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-             
-        </tr>
+      
       </table> 
 
 

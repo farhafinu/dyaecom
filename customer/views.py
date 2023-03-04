@@ -155,10 +155,13 @@ def my_ac(request):
     
 @auth_customer
 def editprofile(request):
+  
+         
+    customer_P=Customer.objects.get(id=request.session['c_id'])
     if request.method == 'POST':
         customer_edit = Customer.objects.get(id = request.session['c_id'])
-        customer_edit.first_name = request.POST['fname']
-        customer_edit.last_name = request.POST['lname']
+        customer_edit.first_name = request.POST['first-name']
+        customer_edit.last_name = request.POST['last-name']
         customer_edit.email = request.POST['email']
         customer_edit.mobile = request.POST['mobile']
         customer_edit.address = request.POST['address']
@@ -167,7 +170,7 @@ def editprofile(request):
 
 
     customer_edit1 = Customer.objects.get(id = request.session['c_id'])
-    return render(request,'customer/editform.html',{'edit_profile':customer_edit1})
+    return render(request,'customer/editform.html',{'edit_profile':customer_edit1,'customer_details':customer_P})
 
     
 
